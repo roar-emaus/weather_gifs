@@ -22,7 +22,7 @@ def create_temperature_pngs():
 
 
 @jit(nopython=True)
-def convert_to_rgb(matrix):
+def convert_to_rgb(matrix, lut):
     t_n, r_n, c_n = matrix.shape
     air_range = np.linspace(233.14, 313.15, 254)
     result = np.zeros(matrix.shape + (3,))
