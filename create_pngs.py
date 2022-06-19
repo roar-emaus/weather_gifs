@@ -16,7 +16,7 @@ def open_dataset():
 
 def create_temperature_pngs():
     ds = open_dataset()
-    air_t = ds.air_temperature_2m
+    air_t = ds.air_temperature_2m.to_numpy()
     matrix = convert_to_rgb(air_t, viridis)
     save_to_png(matrix)
 
