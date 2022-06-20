@@ -5,7 +5,7 @@ import numpy as np
 from numba import jit
 from pathlib import Path
 from PIL import Image, ImageOps
-from data.cmaps import viridis
+from data.cmaps import viridis, spectral_r
 
 
 def open_dataset():
@@ -17,8 +17,8 @@ def open_dataset():
 def create_temperature_pngs():
     ds = open_dataset()
     air_t = ds.air_temperature_2m.to_numpy()
-    matrix = convert_to_rgb(air_t, viridis)
-    save_to_png(matrix)
+    matrix = convert_to_rgb(air_t, spectral_r)
+    save_to_png(matrix, name="air_temp")
 
 
 @jit(nopython=True)
@@ -35,14 +35,14 @@ def convert_to_rgb(matrix, lut):
     return result
 
 
-def save_to_png(matrix):
+def save_to_png(matrix, name):
     for t in range(matrix.shape[0]):
         img = ImageOps.flip(
                 Image.fromarray(
                     matrix[t, :, :].astype(np.uint8), mode="RGB"
                     )
                 )
-        img.save(f"test_{t:02d}.png")
+        img.save(f"{name}_{t:02d}.png")
 
 
 if __name__ == "__main__":
