@@ -259,7 +259,7 @@ viridis = np.array([
 [253,231,36],
 ], dtype=np.uint8)
 
-sepctral_r = array([
+spectral_r = np.array([
 [ 94,  79, 162],
 [ 92,  81, 163],
 [ 90,  83, 164],
@@ -515,4 +515,4 @@ sepctral_r = array([
 [165,   8,  67],
 [162,   5,  67],
 [160,   3,  66],
-[158,   1,  66]], dtype=uint8)
+[158,   1,  66]], dtype=np.uint8)
