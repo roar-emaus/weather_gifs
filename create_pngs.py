@@ -20,6 +20,7 @@ def create_temperature_pngs():
     min_dist = 273.15 - air_t.min() if air_t.min() < 273.15 else 0.01
     max_dist = air_t.max() - 273.15 if air_t.max() > 273.15 else 0.01
     span = np.linspace(air_t.min(), air_t.max(), 254) 
+    #span = np.linspace(min_dist, max_dist, 254) 
     
     matrix = convert_to_rgb(air_t, span, spectral_r)
     save_to_png(matrix, name="air_temp")
@@ -28,7 +29,6 @@ def create_temperature_pngs():
 @jit(nopython=True)
 def convert_to_rgb(matrix, span, lut):
     t_n, r_n, c_n = matrix.shape
-    #air_range = np.linspace(233.14, 313.15, 254)
     result = np.zeros(matrix.shape + (3,))
     for t in range(t_n):
         for r in range(r_n):
